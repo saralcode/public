@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    form {
+      display: flex;
+      padding: 10px;
+      max-width: 15rem;
+      width: 100%;
+      background-color: orange;
+      flex-direction: column;
+    }
+
+    form input {
+      padding: 10px;
+      margin: 10px;
+      outline: none;
+      border-radius: 5px;
+      border: 0px;
+    }
+
+    form div {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    #submit {
+      height: 30px;
+      user-select: none;
+      min-width: 100px;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      border: 0px;
+      border-radius: 5px;
+      background-color: blueviolet;
+      color: white;
+    }
+
+    form:valid #submit {
+      background: rgb(6, 179, 6);
+    }
+
+    form input:focus {
+      outline: 2px solid blueviolet;
+    }
+
+    .right {
+      margin-left: 15rem;
+      transition: all 0.1s linear;
+    }
+
+    .left {
+      margin-left: -15rem;
+      transition: all 0.1s linear;
+    }
+  </style>
+</head>
+
+<body>
+  <form onsubmit="event.preventDefault(); submitForm();">
+    <input type="text" placeholder="Enter your name" required name="name" />
+    <input type="email" placeholder="Enter your email" required name="email" />
+    <input type="password" required minlength="8" placeholder="Enter password" name="password" />
+    <div id="btn" onmouseleave="onleave()">
+      <button type="submit" id="submit" onmouseenter="change()">Submit</button>
+    </div>
+  </form>
+</body>
+<script>
+  const button = document.getElementById("submit");
+  const form = document.querySelector("form");
+
+  function submitForm() {
+    if (form.checkValidity()) {
+      alert("Submitted Successfully");
+      form.reset();
+    }
+  }
+
+  function onleave() {
+    button.classList.remove("left", "right");
+  }
+
+  function change() {
+    if (!form.checkValidity()) {
+      button.click();
+      if (button.classList.contains("right")) {
+        button.classList.remove("right");
+        button.classList.add("left");
+      } else {
+        button.classList.add("right");
+        button.classList.remove("left");
+      }
+    }
+  }
+
+</script>
+</html>
